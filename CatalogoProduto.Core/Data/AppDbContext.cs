@@ -1,8 +1,8 @@
-﻿using APICatalogo.Models;
+﻿using CatalogoProduto.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace APICatalogo.Context;
-
+//namespace APICatalogo.Context;
+namespace CatalogoProduto.Core.Context;
 public class AppDbContext: DbContext
 {
     //ctor

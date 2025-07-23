@@ -1,8 +1,7 @@
-﻿using APICatalogo.Models;
-using APICatalogo.Repositories.Interfaces;
+﻿using APICatalogo.Repositories.Interfaces;
+using CatalogoProduto.Core.Models;
 
-//namespace APICatalogo.Repositories.Interfaces;
-namespace CatalogoProduto.RepositoryGenerico.Interfaces;
+namespace CatalogoProduto.RepositoryGenerico.Repositories.Interfaces;
 
 public interface IProdutoRepository : IRepository<Produto>
 {

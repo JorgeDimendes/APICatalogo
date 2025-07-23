@@ -1,11 +1,9 @@
-﻿using APICatalogo.Context;
-using APICatalogo.Models;
-using APICatalogo.Repositories;
-using APICatalogo.Repositories.Interfaces;
-using CatalogoProduto.RepositoryGenerico.Interfaces;
+﻿using APICatalogo.Repositories;
+using CatalogoProduto.Core.Context;
+using CatalogoProduto.Core.Models;
+using CatalogoProduto.RepositoryGenerico.Repositories.Interfaces;
 
-//namespace APICatalogo.Repositories;
-namespace CatalogoProduto.RepositoryGenerico;
+namespace CatalogoProduto.RepositoryGenerico.Repositories;
 
 public class ProdutoRepository : Repository<Produto>, IProdutoRepository
 {

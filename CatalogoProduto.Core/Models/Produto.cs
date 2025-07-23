@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace APICatalogo.Models;
+//namespace APICatalogo.Models;
+namespace CatalogoProduto.Core.Models;
 
 [Table("Produtos")]
 public class Produto //: IValidatableObject

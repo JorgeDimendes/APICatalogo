@@ -1,8 +1,6 @@
-﻿using APICatalogo.Models;
-using APICatalogo.Repositories.Interfaces;
+﻿using CatalogoProduto.Core.Models;
 
-//namespace APICatalogo.Repositories.Interfaces;
-namespace CatalogoProduto.RepositoryGenerico.Interfaces;
+namespace APICatalogo.Repositories.Interfaces;
 
 public interface ICategoriaRepository : IRepository<Categoria>
 {

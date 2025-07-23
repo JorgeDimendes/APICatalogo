@@ -1,8 +1,10 @@
-using APICatalogo.Context;
 using APICatalogo.Controllers;
 using APICatalogo.Repositories;
 using APICatalogo.Repositories.Interfaces;
-using CatalogoProdutoRepositoryUnico.Interfaces;
+using CatalogoProduto.Core.Context;
+using CatalogoProduto.RepositoryGenerico.Repositories;
+using CatalogoProduto.RepositoryGenerico.Repositories.Interfaces;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
