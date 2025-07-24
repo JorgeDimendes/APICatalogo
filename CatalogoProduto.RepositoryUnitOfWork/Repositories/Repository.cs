@@ -1,8 +1,8 @@
-﻿using APICatalogo.Context;
-using APICatalogo.Repositories.Interfaces;
+﻿using CatalogoProduto.Core.Context;
+using CatalogoProduto.RepositoryUnitOfWork.Repositories.Interfaces;
 using System.Linq.Expressions;
 
-namespace APICatalogo.Repositories;
+namespace CatalogoProduto.RepositoryUnitOfWork.Repositories;
 
 public class Repository<T>: IRepository<T> where T : class
 {
