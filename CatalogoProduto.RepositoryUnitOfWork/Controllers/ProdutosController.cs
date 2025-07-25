@@ -8,19 +8,17 @@ namespace CatalogoProduto.RepositoryUnitOfWork
     [ApiController]
     public class ProdutosController : ControllerBase
     {
-        private readonly IRepository<Produto> _produtoRepository;
-        private readonly IProdutoRepository _pRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ProdutosController(IRepository<Produto> produtoRepository, IProdutoRepository pRepository)
+        public ProdutosController(IUnitOfWork unitOfWork)
         {
-            _produtoRepository = produtoRepository;
-            _pRepository = pRepository;
+            _unitOfWork = unitOfWork;
         }
 
-        [HttpGet("produtos/{id}")]
+        [HttpGet("categoria/{id}")]
         public ActionResult<IEnumerable<Produto>> GetProdutosCategoria(int id)
         {
-            var produtos = _pRepository.GetProdutoPorCategoria(id);
+            var produtos = _unitOfWork.ProdutoRepository.GetProdutoPorCategoria(id);
             if (produtos is null)
             {
                 return NotFound("Nenhum produto encontrado com os critérios informados.");
@@ -31,7 +29,7 @@ namespace CatalogoProduto.RepositoryUnitOfWork
         [HttpGet]
         public ActionResult<IEnumerable<Produto>> Get()
         {
-            var result = _produtoRepository.GetAll();
+            var result = _unitOfWork.ProdutoRepository.GetAll();
             if (result is null)
             {
                 return NotFound("Produtos não encontrado");
@@ -42,7 +40,7 @@ namespace CatalogoProduto.RepositoryUnitOfWork
         [HttpGet("{id}")]
         public ActionResult<Produto> Get(int id)
         {
-            var produto = _produtoRepository.Get(p => p.ProdutoId == id);
+            var produto = _unitOfWork.ProdutoRepository.Get(p => p.ProdutoId == id);
 
             if (produto is null)
             {
@@ -57,8 +55,8 @@ namespace CatalogoProduto.RepositoryUnitOfWork
             if (produto is null)
                 return BadRequest("Erro ao cadastrar produto");
 
-            var novoProduto = _produtoRepository.Create(produto);
-
+            var novoProduto = _unitOfWork.ProdutoRepository.Create(produto);
+            _unitOfWork.Commit();
             return Ok(novoProduto);
         }
 
@@ -70,19 +68,21 @@ namespace CatalogoProduto.RepositoryUnitOfWork
                 return BadRequest("Erro ao atualizar produto");
             }
 
-            var atualizado = _produtoRepository.Update(produto);
+            var atualizado = _unitOfWork.ProdutoRepository.Update(produto);
+            _unitOfWork.Commit();
             return Ok(atualizado);
         }
 
         [HttpDelete("{id:int}")]
         public ActionResult Delete(int id)
         {
-            var localiza = _produtoRepository.Get(p => p.ProdutoId == id);
+            var localiza = _unitOfWork.ProdutoRepository.Get(p => p.ProdutoId == id);
             if (localiza == null)
             {
                 return BadRequest($"Falha ao excluir o produto do id = {id}");
             }
-            var produtoRemovido = _produtoRepository.Delete(localiza);
+            var produtoRemovido = _unitOfWork.ProdutoRepository.Delete(localiza);
+            _unitOfWork.Commit();
             return Ok(produtoRemovido);
         }
     }

@@ -8,17 +8,18 @@ namespace CatalogoProduto.RepositoryUnitOfWork
     [ApiController]
     public class CategoriasController : ControllerBase
     {
-        private readonly IRepository<Categoria> _repository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CategoriasController(IRepository<Categoria> repository)
+        public CategoriasController(IUnitOfWork unitOfWork)
         {
-            _repository = repository;
+            _unitOfWork = unitOfWork;
         }
+
 
         [HttpGet]
         public ActionResult<IEnumerable<Categoria>> Get()
         {
-            var categorias = _repository.GetAll();
+            var categorias = _unitOfWork.CategoriaRepository.GetAll();
             return Ok(categorias);
         }
 
@@ -27,7 +28,7 @@ namespace CatalogoProduto.RepositoryUnitOfWork
         public ActionResult<Categoria> Get(int id)
         {
 
-            var categoria = _repository.Get(c => c.CategoriaId == id);
+            var categoria = _unitOfWork.CategoriaRepository.Get(c => c.CategoriaId == id);
             if (categoria is null)
             {
                 return NotFound($"Categoria comm id: {id} não encontrado...");
@@ -38,7 +39,8 @@ namespace CatalogoProduto.RepositoryUnitOfWork
         [HttpPost]
         public ActionResult Post(Categoria categoria)
         {
-            var categoriaCriada = _repository.Create(categoria);
+            var categoriaCriada = _unitOfWork.CategoriaRepository.Create(categoria);
+            _unitOfWork.Commit();
             return Ok(categoriaCriada);
         }
 
@@ -49,19 +51,21 @@ namespace CatalogoProduto.RepositoryUnitOfWork
             {
                 return BadRequest("Dados invalidos"); // Erro 400 Bad Request
             }
-            _repository.Update(categoria);
+            _unitOfWork.CategoriaRepository.Update(categoria);
+            _unitOfWork.Commit();
             return Ok(categoria);
         }
 
         [HttpDelete("{id:int}")]
         public ActionResult Delete(int id)
         {
-            var categoria = _repository.Get(c => c.CategoriaId == id);
+            var categoria = _unitOfWork.CategoriaRepository.Get(c => c.CategoriaId == id);
             if (categoria is null)
             {
                 return NotFound("Categoria não localizado...");
             }
-            var categoriaRemovida = _repository.Delete(categoria);
+            var categoriaRemovida = _unitOfWork.CategoriaRepository.Delete(categoria);
+            _unitOfWork.Commit();
             return Ok(categoriaRemovida);
         }
     }
