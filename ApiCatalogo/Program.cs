@@ -23,9 +23,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //Usando Strig de Conexão
-string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
+#region Banco de Dados
+builder.Services.AddDbContext<AppDbContext>(
+    context => context.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
+//string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
+//builder.Services.AddDbContext<AppDbContext>(options =>
+//    options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
+#endregion
 
 //Repository
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
