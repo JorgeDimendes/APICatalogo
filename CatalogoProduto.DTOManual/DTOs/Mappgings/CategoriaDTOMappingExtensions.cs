@@ -4,7 +4,7 @@ namespace CatalogoProduto.DTOManual.DTOs.Mappgings;
 
 public static class CategoriaDTOMappingExtensions
 {
-    public static CategoriaDTO? ToCategoriaDTO(this CategoriaDTO categoria)
+    public static CategoriaDTO? ToCategoriaDTO(this Categoria categoria)
     {
         if (categoria == null)
         {
