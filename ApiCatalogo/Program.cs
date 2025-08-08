@@ -1,9 +1,9 @@
 using CatalogoProduto.Core.Context;
-using CatalogoProduto.RepositoryUnitOfWork;
-using CatalogoProduto.RepositoryUnitOfWork.Repositories;
-using CatalogoProduto.RepositoryUnitOfWork.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using CatalogoProduto.DTOAutoMapper;
+using CatalogoProduto.DTOAutoMapper.Repositories;
+using CatalogoProduto.DTOAutoMapper.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +22,7 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//Usando Strig de Conexão
+//Usando Strig de Conexï¿½o
 #region Banco de Dados
 builder.Services.AddDbContext<AppDbContext>(
     context => context.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))

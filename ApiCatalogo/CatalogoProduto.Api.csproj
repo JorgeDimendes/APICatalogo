@@ -28,7 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CatalogoProduto.Core\CatalogoProduto.Core.csproj" />
-    <ProjectReference Include="..\CatalogoProduto.DTOManual\CatalogoProduto.DTOManual.csproj" />
+    <ProjectReference Include="..\CatalogoProduto.DTOAutoMapper\CatalogoProduto.DTOAutoMapper.csproj" />
   </ItemGroup>
 
 </Project>
