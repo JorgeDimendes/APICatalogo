@@ -18,7 +18,7 @@ namespace CatalogoProduto.RepositoryUnitOfWork
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<CategoriaDTO>> Get()
+        public ActionResult<IEnumerable<CategoriaDto>> Get()
         {
             var categorias = _unitOfWork.CategoriaRepository.GetAll();
 
@@ -45,7 +45,7 @@ namespace CatalogoProduto.RepositoryUnitOfWork
         }
 
         [HttpGet("{id}")]
-        public ActionResult<CategoriaDTO> Get(int id)
+        public ActionResult<CategoriaDto> Get(int id)
         {
 
             var categoria = _unitOfWork.CategoriaRepository.Get(c => c.CategoriaId == id);
@@ -58,7 +58,7 @@ namespace CatalogoProduto.RepositoryUnitOfWork
         }
 
         [HttpPost]
-        public ActionResult<CategoriaDTO> Post(CategoriaDTO categoriaDto)
+        public ActionResult<CategoriaDto> Post(CategoriaDto categoriaDto)
         {
             if(categoriaDto == null)
             {
@@ -75,7 +75,7 @@ namespace CatalogoProduto.RepositoryUnitOfWork
         }
 
         [HttpPut("{id:int}")]
-        public ActionResult<CategoriaDTO> Put(int id, CategoriaDTO categoriaDto)
+        public ActionResult<CategoriaDto> Put(int id, CategoriaDto categoriaDto)
         {
             if (id != categoriaDto.CategoriaId)
             {
@@ -93,7 +93,7 @@ namespace CatalogoProduto.RepositoryUnitOfWork
         }
 
         [HttpDelete("{id:int}")]
-        public ActionResult<CategoriaDTO> Delete(int id)
+        public ActionResult<CategoriaDto> Delete(int id)
         {
             var categoria = _unitOfWork.CategoriaRepository.Get(c => c.CategoriaId == id);
             if (categoria is null)

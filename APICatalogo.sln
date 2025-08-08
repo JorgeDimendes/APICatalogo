@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogoProduto.Core", "Cat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogoProduto.DTOManual", "CatalogoProduto.DTOManual\CatalogoProduto.DTOManual.csproj", "{EC05B747-F093-4868-A8C8-405AE37B051B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogoProduto.DTOAutoMapper", "CatalogoProduto.DTOAutoMapper\CatalogoProduto.DTOAutoMapper.csproj", "{FD3D211C-EA92-40FB-9912-5543678EBC9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{EC05B747-F093-4868-A8C8-405AE37B051B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC05B747-F093-4868-A8C8-405AE37B051B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC05B747-F093-4868-A8C8-405AE37B051B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD3D211C-EA92-40FB-9912-5543678EBC9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD3D211C-EA92-40FB-9912-5543678EBC9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD3D211C-EA92-40FB-9912-5543678EBC9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD3D211C-EA92-40FB-9912-5543678EBC9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

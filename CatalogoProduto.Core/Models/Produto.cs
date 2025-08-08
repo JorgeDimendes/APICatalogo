@@ -35,7 +35,6 @@ public class Produto //: IValidatableObject
     //[JsonIgnore]
     public Categoria? Categoria { get; set; }
 
-
     //public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     //{
     //    if (!string.IsNullOrEmpty(this.Nome))

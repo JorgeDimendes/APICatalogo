@@ -2,7 +2,7 @@
 
 namespace CatalogoProduto.DTOManual.DTOs
 {
-    public class CategoriaDTO
+    public class CategoriaDto
     {
         public int CategoriaId { get; set; }
 
