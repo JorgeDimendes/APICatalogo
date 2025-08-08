@@ -10,7 +10,6 @@ public static class CategoriaDTOMappingExtensions
         {
             return null;
         }
-
         return new CategoriaDTO
         {
             CategoriaId = categoria.CategoriaId,
@@ -37,10 +36,11 @@ public static class CategoriaDTOMappingExtensions
         {
             return new List<CategoriaDTO>();
         }
-
         return categorias.Select(categoria => new CategoriaDTO
         {
-
+            CategoriaId = categoria.CategoriaId,
+            Nome = categoria.Nome,
+            ImagemUrl = categoria.ImagemUrl
         }).ToList();
     }
 }

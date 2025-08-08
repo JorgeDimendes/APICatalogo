@@ -1,5 +1,6 @@
 ﻿using CatalogoProduto.Core.Models;
 using CatalogoProduto.DTOManual.DTOs;
+using CatalogoProduto.DTOManual.DTOs.Mappgings;
 using CatalogoProduto.RepositoryUnitOfWork.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,27 +17,32 @@ namespace CatalogoProduto.RepositoryUnitOfWork
             _unitOfWork = unitOfWork;
         }
 
-
         [HttpGet]
         public ActionResult<IEnumerable<CategoriaDTO>> Get()
         {
             var categorias = _unitOfWork.CategoriaRepository.GetAll();
 
-            var categoriasDto = new List<CategoriaDTO>();
-            foreach (var categoria in categorias)
-            {
-                var categoriaDto = new CategoriaDTO()
-                {
-                    CategoriaId = categoria.CategoriaId,
-                    Nome = categoria.Nome,
-                    ImagemUrl = categoria.ImagemUrl
-                };
-                categoriasDto.Add(categoriaDto);
-            }
+            if(categorias == null)
+                return NotFound("Nenhuma categoria foi encontrada.");
 
-            return Ok(categoriasDto);
+            #region DTO Manual 
+            /*
+              foreach (var categoria in categorias)
+              {
+                  var categoriaDto = new CategoriaDTO()
+                  {
+                      CategoriaId = categoria.CategoriaId,
+                      Nome = categoria.Nome,
+                      ImagemUrl = categoria.ImagemUrl
+                  };
+                  categoriasDto.Add(categoriaDto);
+              }
+              */
+            #endregion
+            
+            var CategoriasDTO = categorias.ToCategoriaDTOList();
+            return Ok(CategoriasDTO);
         }
-
 
         [HttpGet("{id}")]
         public ActionResult<CategoriaDTO> Get(int id)
@@ -47,15 +53,8 @@ namespace CatalogoProduto.RepositoryUnitOfWork
             {
                 return NotFound($"Categoria comm id: {id} não encontrado...");
             }
-
-            var categoriaDto = new CategoriaDTO()
-            {
-                CategoriaId = categoria.CategoriaId,
-                Nome = categoria.Nome,
-                ImagemUrl = categoria.ImagemUrl
-            };
-
-            return Ok(categoriaDto);
+            var CategoriasDTO = categoria.ToCategoriaDTO();
+            return Ok(CategoriasDTO);
         }
 
         [HttpPost]
@@ -65,54 +64,31 @@ namespace CatalogoProduto.RepositoryUnitOfWork
             {
                 return BadRequest("Dados invalidos");
             }
-            //Criando Conversão
-            var categoria = new Categoria()
-            {
-                CategoriaId = categoriaDto.CategoriaId,
-                Nome = categoriaDto.Nome,
-                ImagemUrl = categoriaDto.ImagemUrl
-            };
+            
+            var categoria = categoriaDto.ToCategoria();
 
             var categoriaCriada = _unitOfWork.CategoriaRepository.Create(categoria);
             _unitOfWork.Commit();
 
-            var novaCategoriaDto = new CategoriaDTO()
-            {
-                CategoriaId = categoriaCriada.CategoriaId,
-                Nome = categoriaCriada.Nome,
-                ImagemUrl = categoriaCriada.ImagemUrl
-            };
-
+            var novaCategoriaDto =  categoriaCriada.ToCategoriaDTO();
             return Ok(novaCategoriaDto);
         }
 
         [HttpPut("{id:int}")]
         public ActionResult<CategoriaDTO> Put(int id, CategoriaDTO categoriaDto)
         {
-            
-
             if (id != categoriaDto.CategoriaId)
             {
                 return BadRequest("Dados invalidos"); // Erro 400 Bad Request
             }
-
-            //Criando Conversão
-            var categoria = new Categoria()
-            {
-                CategoriaId = categoriaDto.CategoriaId,
-                Nome = categoriaDto.Nome,
-                ImagemUrl = categoriaDto.ImagemUrl
-            };
-
+            
+            var categoria = categoriaDto.ToCategoria();
+            
             var categoriaAtualizada = _unitOfWork.CategoriaRepository.Update(categoria);
             _unitOfWork.Commit();
 
-            var categoriaAtualizadaDto = new Categoria()
-            {
-                CategoriaId = categoriaAtualizada.CategoriaId,
-                Nome = categoriaAtualizada.Nome,
-                ImagemUrl = categoriaAtualizada.ImagemUrl
-            };
+            var categoriaAtualizadaDto = categoriaAtualizada.ToCategoriaDTO();
+            
             return Ok(categoriaAtualizadaDto);
         }
 
@@ -127,13 +103,7 @@ namespace CatalogoProduto.RepositoryUnitOfWork
             var categoriaRemovida = _unitOfWork.CategoriaRepository.Delete(categoria);
             _unitOfWork.Commit();
 
-            var categoriaRemovidaDto = new Categoria()
-            {
-                CategoriaId = categoriaRemovida.CategoriaId,
-                Nome = categoriaRemovida.Nome,
-                ImagemUrl = categoriaRemovida.ImagemUrl
-            };
-
+            var categoriaRemovidaDto = categoriaRemovida.ToCategoriaDTO();
             return Ok(categoriaRemovidaDto);
         }
     }
