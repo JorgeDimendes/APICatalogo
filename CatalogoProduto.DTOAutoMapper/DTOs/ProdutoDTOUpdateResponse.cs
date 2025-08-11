@@ -4,25 +4,14 @@ using CatalogoProduto.Core.Models;
 
 namespace CatalogoProduto.DTOAutoMapper.DTOs;
 
-public class ProdutoDto
+public class ProdutoDTOUpdateResponse
 {
     public int ProdutoId { get; set; }
-
-    [Required(ErrorMessage = "O Nome é obrigatorio")]
-    [StringLength(80)]
     public string? Nome { get; set; }
-
-    [Required]
-    [StringLength(300)]
     public string? Descricao { get; set; }
-
-    [Required]
     public decimal Preco { get; set; }
-
-    [Required]
-    [StringLength(300)]
     public string? ImagemUrl { get; set; }
-
-    //Vincular e propriedade de navegação
+    public float Estoque { get; set; }
+    public DateTime DataCadastro { get; set; } = DateTime.Now;
     public int CategoriaId { get; set; }
 }

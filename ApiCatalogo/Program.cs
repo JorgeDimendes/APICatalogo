@@ -2,6 +2,7 @@ using CatalogoProduto.Core.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using CatalogoProduto.DTOAutoMapper;
+using CatalogoProduto.DTOAutoMapper.DTOs.Mappgings;
 using CatalogoProduto.DTOAutoMapper.Repositories;
 using CatalogoProduto.DTOAutoMapper.Repositories.Interfaces;
 
@@ -10,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers().AddJsonOptions(options =>
-options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles).AddNewtonsoftJson();
 
 // Depois apagar:
 builder.Services.AddControllers()
@@ -21,6 +22,8 @@ builder.Services.AddControllers()
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
 
 //Usando Strig de Conex�o
 #region Banco de Dados
@@ -37,6 +40,9 @@ builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+//Automapper
+builder.Services.AddAutoMapper(typeof(ProdutoDtoMappingProfile));
 
 var app = builder.Build();
 
