@@ -1,10 +1,10 @@
 using CatalogoProduto.Core.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
-using CatalogoProduto.DTOAutoMapper;
-using CatalogoProduto.DTOAutoMapper.DTOs.Mappgings;
-using CatalogoProduto.DTOAutoMapper.Repositories;
-using CatalogoProduto.DTOAutoMapper.Repositories.Interfaces;
+using CatalogoProduto.DTOAutoMapperAlternativo;
+using CatalogoProduto.DTOAutoMapperAlternativo.DTOs.Mappgings;
+using CatalogoProduto.DTOAutoMapperAlternativo.Repositories;
+using CatalogoProduto.DTOAutoMapperAlternativo.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
