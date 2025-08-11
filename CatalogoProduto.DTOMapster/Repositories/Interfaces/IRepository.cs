@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace CatalogoProduto.DTOAutoMapperAlternativo.Repositories.Interfaces;
+namespace CatalogoProduto.DTOMapster.Repositories.Interfaces;
 
 // Repository generico
 public interface IRepository<T>

@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using CatalogoProduto.Core.Models;
-using CatalogoProduto.DTOAutoMapperAlternativo.DTOs;
-using CatalogoProduto.DTOAutoMapperAlternativo.Repositories.Interfaces;
+using CatalogoProduto.DTOMapster.DTOs;
+using CatalogoProduto.DTOMapster.Repositories.Interfaces;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CatalogoProduto.DTOAutoMapperAlternativo
+namespace CatalogoProduto.DTOMapster
 {
     [Route("[controller]")]
     [ApiController]

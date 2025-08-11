@@ -1,9 +1,9 @@
 ﻿using CatalogoProduto.Core.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using CatalogoProduto.DTOAutoMapperAlternativo.Repositories.Interfaces;
+using CatalogoProduto.DTOMapster.Repositories.Interfaces;
 
-namespace CatalogoProduto.DTOAutoMapperAlternativo.Repositories;
+namespace CatalogoProduto.DTOMapster.Repositories;
 
 public class Repository<T>: IRepository<T> where T : class
 {

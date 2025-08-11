@@ -1,6 +1,6 @@
 ﻿using CatalogoProduto.Core.Models;
 
-namespace CatalogoProduto.DTOAutoMapperAlternativo.Repositories.Interfaces;
+namespace CatalogoProduto.DTOMapster.Repositories.Interfaces;
 
 public interface IProdutoRepository : IRepository<Produto>
 {

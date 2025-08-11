@@ -1,4 +1,4 @@
-﻿namespace CatalogoProduto.DTOAutoMapperAlternativo.Repositories.Interfaces
+﻿namespace CatalogoProduto.DTOMapster.Repositories.Interfaces
 {
     public interface IUnitOfWork
     {

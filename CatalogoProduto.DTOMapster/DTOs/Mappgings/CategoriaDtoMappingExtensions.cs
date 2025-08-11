@@ -1,6 +1,6 @@
 ﻿using CatalogoProduto.Core.Models;
 
-namespace CatalogoProduto.DTOAutoMapperAlternativo.DTOs.Mappgings;
+namespace CatalogoProduto.DTOMapster.DTOs.Mappgings;
 
 public static class CategoriaDtoMappingExtensions
 {

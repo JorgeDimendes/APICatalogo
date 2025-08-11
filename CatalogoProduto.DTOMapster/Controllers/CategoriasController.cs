@@ -1,9 +1,9 @@
-﻿using CatalogoProduto.DTOAutoMapperAlternativo.DTOs;
-using CatalogoProduto.DTOAutoMapperAlternativo.DTOs.Mappgings;
-using CatalogoProduto.DTOAutoMapperAlternativo.Repositories.Interfaces;
+﻿using CatalogoProduto.DTOMapster.DTOs.Mappgings;
+using CatalogoProduto.DTOMapster.DTOs;
+using CatalogoProduto.DTOMapster.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CatalogoProduto.DTOAutoMapperAlternativo
+namespace CatalogoProduto.DTOMapster
 {
     [Route("[controller]")]
     [ApiController]

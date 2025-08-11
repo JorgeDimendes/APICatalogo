@@ -1,7 +1,7 @@
 ﻿using CatalogoProduto.Core.Context;
-using CatalogoProduto.DTOAutoMapperAlternativo.Repositories.Interfaces;
+using CatalogoProduto.DTOMapster.Repositories.Interfaces;
 
-namespace CatalogoProduto.DTOAutoMapperAlternativo.Repositories
+namespace CatalogoProduto.DTOMapster.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {

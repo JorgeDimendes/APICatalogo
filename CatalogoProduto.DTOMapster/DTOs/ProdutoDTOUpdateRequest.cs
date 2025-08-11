@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace CatalogoProduto.DTOAutoMapperAlternativo.DTOs;
+namespace CatalogoProduto.DTOMapster.DTOs;
 
 public class ProdutoDTOUpdateRequest : IValidatableObject
 {
