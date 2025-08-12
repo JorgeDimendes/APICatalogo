@@ -5,6 +5,7 @@ using CatalogoProduto.DTOMapster.Pagination;
 using CatalogoProduto.DTOMapster.Repositories.Interfaces;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace CatalogoProduto.DTOMapster
 {
@@ -33,14 +34,40 @@ namespace CatalogoProduto.DTOMapster
             return Ok(produtosDto);
         }
 
-        [HttpGet("pagination")]
+        //Navegação Simples
+        #region NavegaçãoSimples()
+        /*[HttpGet("pagination")]
         public ActionResult<IEnumerable<ProdutoDto>> GetProdutosPaginacao([FromQuery] ProdutosParameters produtosParams)
         {
             var produtos = _unitOfWork.ProdutoRepository.GetProdutos(produtosParams);
             var produtosDto = _mapper.Map<IEnumerable<ProdutoDto>>(produtos);
             return Ok(produtosDto);
-        }
+        }*/
+        #endregion
+        
+        //Navegação avançada
+        [HttpGet("pagination")]
+        public ActionResult<IEnumerable<ProdutoDto>> GetProdutosPaginacao([FromQuery] ProdutosParameters produtosParams)
+        {
+            var produtos = _unitOfWork.ProdutoRepository.GetProdutos(produtosParams);
 
+            var metadata = new
+            {
+                produtos.TotalCount,
+                produtos.PageSize,
+                produtos.CurrentPage,
+                produtos.TotalPages,
+                produtos.HasNext,
+                produtos.HasPrevious
+            };
+            
+            //Response.Headers.Append("X-Pagination", JsonConvert.SerializeObject(metadata));
+            Response.Headers["X-Pagination"] = JsonConvert.SerializeObject(metadata);
+            
+            var produtosDto = _mapper.Map<IEnumerable<ProdutoDto>>(produtos.ToList());
+            return Ok(produtosDto);
+        }
+        
         [HttpGet]
         public ActionResult<IEnumerable<ProdutoDto>> Get()
         {

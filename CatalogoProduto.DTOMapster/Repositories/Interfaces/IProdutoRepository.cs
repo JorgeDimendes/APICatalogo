@@ -5,8 +5,11 @@ namespace CatalogoProduto.DTOMapster.Repositories.Interfaces;
 
 public interface IProdutoRepository : IRepository<Produto>
 {
-    //Paginação
-    IEnumerable<Produto> GetProdutos(ProdutosParameters produtosParams);
+    //Paginação simples
+    //IEnumerable<Produto> GetProdutos(ProdutosParameters produtosParams);
+    
+    //Paginação avançada
+    PagedList<Produto> GetProdutos(ProdutosParameters produtosParams);
     
     IEnumerable<Produto> GetProdutoPorCategoria(int id);
 }
