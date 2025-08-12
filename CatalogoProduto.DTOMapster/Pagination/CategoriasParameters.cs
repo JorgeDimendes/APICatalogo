@@ -1,6 +1,6 @@
 namespace CatalogoProduto.DTOMapster.Pagination;
 
-public class ProdutosParameters : QueryStringParameters
+public class CategoriasParameters : QueryStringParameters
 {
     
 }
