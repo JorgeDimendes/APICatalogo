@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CatalogoProduto.Core.Models;
 using CatalogoProduto.DTOMapster.DTOs;
+using CatalogoProduto.DTOMapster.Pagination;
 using CatalogoProduto.DTOMapster.Repositories.Interfaces;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +29,14 @@ namespace CatalogoProduto.DTOMapster
                 return NotFound("Nenhum produto encontrado com os critérios informados.");
             }
 
+            var produtosDto = _mapper.Map<IEnumerable<ProdutoDto>>(produtos);
+            return Ok(produtosDto);
+        }
+
+        [HttpGet("pagination")]
+        public ActionResult<IEnumerable<ProdutoDto>> GetProdutosPaginacao([FromQuery] ProdutosParameters produtosParams)
+        {
+            var produtos = _unitOfWork.ProdutoRepository.GetProdutos(produtosParams);
             var produtosDto = _mapper.Map<IEnumerable<ProdutoDto>>(produtos);
             return Ok(produtosDto);
         }
