@@ -1,7 +1,9 @@
 ﻿using CatalogoProduto.DTOMapster.DTOs.Mappgings;
 using CatalogoProduto.DTOMapster.DTOs;
+using CatalogoProduto.DTOMapster.Pagination;
 using CatalogoProduto.DTOMapster.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace CatalogoProduto.DTOMapster
 {
@@ -10,7 +12,6 @@ namespace CatalogoProduto.DTOMapster
     public class CategoriasController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
-
         public CategoriasController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -41,6 +42,26 @@ namespace CatalogoProduto.DTOMapster
             
             var CategoriasDTO = categorias.ToCategoriaDTOList();
             return Ok(CategoriasDTO);
+        }
+
+        [HttpGet("pagination")]
+        public ActionResult<IEnumerable<CategoriaDto>> GetPagination([FromQuery] CategoriasParameters categoriasParams)
+        {
+            var categorias = _unitOfWork.CategoriaRepository.GetCategorias(categoriasParams);
+
+            var metadata = new
+            {
+                categorias.TotalCount,
+                categorias.PageSize,
+                categorias.CurrentPage,
+                categorias.TotalPages,
+                categorias.HasNext,
+                categorias.HasPrevious
+            };
+            Response.Headers["X-Pagination"] = JsonConvert.SerializeObject(metadata);
+            
+            var categoriasDto = categorias.ToCategoriaDTOList();
+            return Ok(categoriasDto);
         }
 
         [HttpGet("{id}")]
