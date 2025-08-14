@@ -51,6 +51,36 @@ namespace CatalogoProduto.DTOMapster
         {
             var produtos = _unitOfWork.ProdutoRepository.GetProdutos(produtosParams);
 
+            /*var metadata = new
+            {
+                produtos.TotalCount,
+                produtos.PageSize,
+                produtos.CurrentPage,
+                produtos.TotalPages,
+                produtos.HasNext,
+                produtos.HasPrevious
+            };
+            
+            //Response.Headers.Append("X-Pagination", JsonConvert.SerializeObject(metadata));
+            Response.Headers["X-Pagination"] = JsonConvert.SerializeObject(metadata);
+            
+            var produtosDto = _mapper.Map<IEnumerable<ProdutoDto>>(produtos.ToList());
+            return Ok(produtosDto);*/
+            return ObterProdutos(produtos);
+        }
+        
+        //Filtro
+        [HttpGet("filter/preco/pagination")]
+        public ActionResult<IEnumerable<ProdutoDto>> GetProdutosFilterPreco(
+            [FromQuery] ProdutosFiltroPreco produtosFiltroPreco)
+        {
+            var produtos = _unitOfWork.ProdutoRepository.GetProdutosFiltroPreco(produtosFiltroPreco);
+
+            return ObterProdutos(produtos);
+        }
+
+        private ActionResult<IEnumerable<ProdutoDto>> ObterProdutos(PagedList<Produto> produtos)
+        {
             var metadata = new
             {
                 produtos.TotalCount,
@@ -67,7 +97,7 @@ namespace CatalogoProduto.DTOMapster
             var produtosDto = _mapper.Map<IEnumerable<ProdutoDto>>(produtos.ToList());
             return Ok(produtosDto);
         }
-        
+
         [HttpGet]
         public ActionResult<IEnumerable<ProdutoDto>> Get()
         {

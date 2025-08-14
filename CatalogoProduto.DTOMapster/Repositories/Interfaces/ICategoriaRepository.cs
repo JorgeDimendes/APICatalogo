@@ -7,5 +7,9 @@ namespace CatalogoProduto.DTOMapster.Repositories.Interfaces
     {
         //Paginação
         PagedList<Categoria> GetCategorias(CategoriasParameters categoriasParams);
+        
+        //Filtro Nome
+        PagedList<Categoria> GetCategoriasFiltroNome(CategoriasFiltroNome categoriasParams);
+        
     }
 }

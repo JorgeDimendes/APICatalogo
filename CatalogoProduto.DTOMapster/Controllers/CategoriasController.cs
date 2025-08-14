@@ -1,4 +1,5 @@
-﻿using CatalogoProduto.DTOMapster.DTOs.Mappgings;
+﻿using CatalogoProduto.Core.Models;
+using CatalogoProduto.DTOMapster.DTOs.Mappgings;
 using CatalogoProduto.DTOMapster.DTOs;
 using CatalogoProduto.DTOMapster.Pagination;
 using CatalogoProduto.DTOMapster.Repositories.Interfaces;
@@ -49,6 +50,19 @@ namespace CatalogoProduto.DTOMapster
         {
             var categorias = _unitOfWork.CategoriaRepository.GetCategorias(categoriasParams);
 
+            return ObterCategorias(categorias);
+        }
+        
+        [HttpGet("filter/nome/pagination")]
+        public ActionResult<IEnumerable<CategoriaDto>> GetCategoriasFiltradas([FromQuery] CategoriasFiltroNome categoriasFiltro)
+        {
+            var categoriasFiltradas = _unitOfWork.CategoriaRepository.GetCategoriasFiltroNome(categoriasFiltro);
+
+            return ObterCategorias(categoriasFiltradas);
+        }
+        
+        private ActionResult<IEnumerable<CategoriaDto>> ObterCategorias(PagedList<Categoria> categorias)
+        {
             var metadata = new
             {
                 categorias.TotalCount,

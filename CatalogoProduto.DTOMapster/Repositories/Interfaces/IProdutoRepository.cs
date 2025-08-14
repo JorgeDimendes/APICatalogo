@@ -11,5 +11,8 @@ public interface IProdutoRepository : IRepository<Produto>
     //Paginação avançada
     PagedList<Produto> GetProdutos(ProdutosParameters produtosParams);
     
+    //Filtro Produtos
+    PagedList<Produto> GetProdutosFiltroPreco(ProdutosFiltroPreco produtosFiltroParams);
+    
     IEnumerable<Produto> GetProdutoPorCategoria(int id);
 }
