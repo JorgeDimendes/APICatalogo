@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CatalogoProduto.DTOMapster.DTOs
+namespace CatalogoProduto.Assinc.DTOs
 {
     public class CategoriaDto
     {

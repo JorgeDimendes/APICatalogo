@@ -1,4 +1,4 @@
-namespace CatalogoProduto.DTOMapster.Pagination;
+namespace CatalogoProduto.Assinc.Pagination;
 
 public class PagedList<T> : List<T> where T : class
 {

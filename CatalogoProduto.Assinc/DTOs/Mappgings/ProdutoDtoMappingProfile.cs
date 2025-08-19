@@ -1,7 +1,7 @@
 using AutoMapper;
 using CatalogoProduto.Core.Models;
 
-namespace CatalogoProduto.DTOMapster.DTOs.Mappgings;
+namespace CatalogoProduto.Assinc.DTOs.Mappgings;
 
 public class ProdutoDtoMappingProfile : Profile
 {

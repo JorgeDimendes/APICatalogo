@@ -1,7 +1,7 @@
-﻿using CatalogoProduto.Core.Context;
-using CatalogoProduto.DTOMapster.Repositories.Interfaces;
+﻿using CatalogoProduto.Assinc.Repositories.Interfaces;
+using CatalogoProduto.Core.Context;
 
-namespace CatalogoProduto.DTOMapster.Repositories
+namespace CatalogoProduto.Assinc.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -36,9 +36,9 @@ namespace CatalogoProduto.DTOMapster.Repositories
             }
         }
 
-        public void Commit()
+        public async Task Commit()
         {
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
         }
     }
 }

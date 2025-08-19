@@ -32,7 +32,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CatalogoProduto.Core\CatalogoProduto.Core.csproj" />
-    <ProjectReference Include="..\CatalogoProduto.DTOMapster\CatalogoProduto.DTOMapster.csproj" />
+    <ProjectReference Include="..\CatalogoProduto.Assinc\CatalogoProduto.Assinc.csproj" />
   </ItemGroup>
 
 </Project>

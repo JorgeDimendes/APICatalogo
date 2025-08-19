@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
+using CatalogoProduto.Assinc.DTOs;
+using CatalogoProduto.Assinc.Pagination;
+using CatalogoProduto.Assinc.Repositories.Interfaces;
 using CatalogoProduto.Core.Models;
-using CatalogoProduto.DTOMapster.DTOs;
-using CatalogoProduto.DTOMapster.Pagination;
-using CatalogoProduto.DTOMapster.Repositories.Interfaces;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace CatalogoProduto.DTOMapster
+namespace CatalogoProduto.Assinc
 {
     [Route("[controller]")]
     [ApiController]
@@ -22,9 +22,9 @@ namespace CatalogoProduto.DTOMapster
         }
 
         [HttpGet("categoria/{id}")]
-        public ActionResult<IEnumerable<ProdutoDto>> GetProdutosCategoria(int id)
+        public async Task<ActionResult<IEnumerable<ProdutoDto>>> GetProdutosCategoria(int id)
         {
-            var produtos = _unitOfWork.ProdutoRepository.GetProdutoPorCategoria(id);
+            var produtos = await _unitOfWork.ProdutoRepository.GetProdutoPorCategoria(id);
             if (produtos is null || !produtos.Any())
             {
                 return NotFound("Nenhum produto encontrado com os critérios informados.");
@@ -47,9 +47,9 @@ namespace CatalogoProduto.DTOMapster
         
         //Navegação avançada
         [HttpGet("pagination")]
-        public ActionResult<IEnumerable<ProdutoDto>> GetProdutosPaginacao([FromQuery] ProdutosParameters produtosParams)
+        public async Task<ActionResult<IEnumerable<ProdutoDto>>> GetProdutosPaginacao([FromQuery] ProdutosParameters produtosParams)
         {
-            var produtos = _unitOfWork.ProdutoRepository.GetProdutos(produtosParams);
+            var produtos = await _unitOfWork.ProdutoRepository.GetProdutos(produtosParams);
 
             /*var metadata = new
             {
@@ -71,10 +71,10 @@ namespace CatalogoProduto.DTOMapster
         
         //Filtro
         [HttpGet("filter/preco/pagination")]
-        public ActionResult<IEnumerable<ProdutoDto>> GetProdutosFilterPreco(
+        public async Task<ActionResult<IEnumerable<ProdutoDto>>> GetProdutosFilterPreco(
             [FromQuery] ProdutosFiltroPreco produtosFiltroPreco)
         {
-            var produtos = _unitOfWork.ProdutoRepository.GetProdutosFiltroPreco(produtosFiltroPreco);
+            var produtos = await _unitOfWork.ProdutoRepository.GetProdutosFiltroPreco(produtosFiltroPreco);
 
             return ObterProdutos(produtos);
         }
@@ -99,9 +99,9 @@ namespace CatalogoProduto.DTOMapster
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<ProdutoDto>> Get()
+        public async Task<ActionResult<IEnumerable<ProdutoDto>>> Get()
         {
-            var produtos = _unitOfWork.ProdutoRepository.GetAll();
+            var produtos = await _unitOfWork.ProdutoRepository.GetAll();
             if (produtos is null || !produtos.Any())
             {
                 return NotFound("Produtos não encontrado");
@@ -140,13 +140,13 @@ namespace CatalogoProduto.DTOMapster
         }
 
         [HttpPatch("{id}/updatePartial")]
-        public ActionResult<ProdutoDTOUpdateResponse> Patch(int id, JsonPatchDocument<ProdutoDTOUpdateRequest> patchProdutoDTO)
+        public async Task<ActionResult<ProdutoDTOUpdateResponse>> Patch(int id, JsonPatchDocument<ProdutoDTOUpdateRequest> patchProdutoDTO)
         {
             if (patchProdutoDTO is null || id <= 0)
             {
                 return BadRequest();
             }
-            var produto = _unitOfWork.ProdutoRepository.Get(p => p.ProdutoId == id);
+            var produto = await _unitOfWork.ProdutoRepository.Get(p => p.ProdutoId == id);
             
             if (produto is null) return NotFound();
             
@@ -185,9 +185,9 @@ namespace CatalogoProduto.DTOMapster
         }
 
         [HttpDelete("{id:int}")]
-        public ActionResult<ProdutoDto> Delete(int id)
+        public async Task<ActionResult<ProdutoDto>> Delete(int id)
         {
-            var localiza = _unitOfWork.ProdutoRepository.Get(p => p.ProdutoId == id);
+            var localiza = await _unitOfWork.ProdutoRepository.Get(p => p.ProdutoId == id);
             if (localiza == null)
             {
                 return BadRequest($"Falha ao excluir o produto do id = {id}");

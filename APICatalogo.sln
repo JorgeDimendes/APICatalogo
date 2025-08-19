@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogoProduto.DTOManual",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogoProduto.DTOAutoMapper", "CatalogoProduto.DTOAutoMapper\CatalogoProduto.DTOAutoMapper.csproj", "{FD3D211C-EA92-40FB-9912-5543678EBC9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogoProduto.DTOMapster", "CatalogoProduto.DTOMapster\CatalogoProduto.DTOMapster.csproj", "{642026F1-D7DC-41FC-8D79-7AEB9CE5177C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogoProduto.Assinc", "CatalogoProduto.Assinc\CatalogoProduto.Assinc.csproj", "{642026F1-D7DC-41FC-8D79-7AEB9CE5177C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", "{3FCD0752-6470-4982-8F89-009F0E902003}"
 EndProject

@@ -1,12 +1,12 @@
-﻿using CatalogoProduto.Core.Models;
-using CatalogoProduto.DTOMapster.DTOs.Mappgings;
-using CatalogoProduto.DTOMapster.DTOs;
-using CatalogoProduto.DTOMapster.Pagination;
-using CatalogoProduto.DTOMapster.Repositories.Interfaces;
+﻿using CatalogoProduto.Assinc.DTOs;
+using CatalogoProduto.Assinc.Pagination;
+using CatalogoProduto.Assinc.Repositories.Interfaces;
+using CatalogoProduto.Core.Models;
+using CatalogoProduto.Assinc.DTOs.Mappgings;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace CatalogoProduto.DTOMapster
+namespace CatalogoProduto.Assinc
 {
     [Route("[controller]")]
     [ApiController]
@@ -19,9 +19,9 @@ namespace CatalogoProduto.DTOMapster
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<CategoriaDto>> Get()
+        public async Task<ActionResult<IEnumerable<CategoriaDto>>> Get()
         {
-            var categorias = _unitOfWork.CategoriaRepository.GetAll();
+            var categorias = await _unitOfWork.CategoriaRepository.GetAll();
 
             if(categorias == null)
                 return NotFound("Nenhuma categoria foi encontrada.");
@@ -46,17 +46,17 @@ namespace CatalogoProduto.DTOMapster
         }
 
         [HttpGet("pagination")]
-        public ActionResult<IEnumerable<CategoriaDto>> GetPagination([FromQuery] CategoriasParameters categoriasParams)
+        public async Task<ActionResult<IEnumerable<CategoriaDto>>> GetPagination([FromQuery] CategoriasParameters categoriasParams)
         {
-            var categorias = _unitOfWork.CategoriaRepository.GetCategorias(categoriasParams);
+            var categorias = await _unitOfWork.CategoriaRepository.GetCategorias(categoriasParams);
 
             return ObterCategorias(categorias);
         }
         
         [HttpGet("filter/nome/pagination")]
-        public ActionResult<IEnumerable<CategoriaDto>> GetCategoriasFiltradas([FromQuery] CategoriasFiltroNome categoriasFiltro)
+        public async Task<ActionResult<IEnumerable<CategoriaDto>>> GetCategoriasFiltradas([FromQuery] CategoriasFiltroNome categoriasFiltro)
         {
-            var categoriasFiltradas = _unitOfWork.CategoriaRepository.GetCategoriasFiltroNome(categoriasFiltro);
+            var categoriasFiltradas = await _unitOfWork.CategoriaRepository.GetCategoriasFiltroNome(categoriasFiltro);
 
             return ObterCategorias(categoriasFiltradas);
         }
@@ -79,10 +79,10 @@ namespace CatalogoProduto.DTOMapster
         }
 
         [HttpGet("{id}")]
-        public ActionResult<CategoriaDto> Get(int id)
+        public async Task<ActionResult<CategoriaDto>> Get(int id)
         {
 
-            var categoria = _unitOfWork.CategoriaRepository.Get(c => c.CategoriaId == id);
+            var categoria = await _unitOfWork.CategoriaRepository.Get(c => c.CategoriaId == id);
             if (categoria is null)
             {
                 return NotFound($"Categoria comm id: {id} não encontrado...");
@@ -127,9 +127,9 @@ namespace CatalogoProduto.DTOMapster
         }
 
         [HttpDelete("{id:int}")]
-        public ActionResult<CategoriaDto> Delete(int id)
+        public async Task<ActionResult<CategoriaDto>> Delete(int id)
         {
-            var categoria = _unitOfWork.CategoriaRepository.Get(c => c.CategoriaId == id);
+            var categoria = await _unitOfWork.CategoriaRepository.Get(c => c.CategoriaId == id);
             if (categoria is null)
             {
                 return NotFound("Categoria não localizado...");

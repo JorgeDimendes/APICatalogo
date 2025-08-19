@@ -1,4 +1,4 @@
-﻿namespace CatalogoProduto.DTOMapster.Repositories.Interfaces
+﻿namespace CatalogoProduto.Assinc.Repositories.Interfaces
 {
     public interface IUnitOfWork
     {
@@ -8,6 +8,6 @@
         //Ou
         IProdutoRepository ProdutoRepository { get; }
         ICategoriaRepository CategoriaRepository { get; }
-        void Commit();
+        Task Commit();
     }
 }

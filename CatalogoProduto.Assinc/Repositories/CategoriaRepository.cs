@@ -1,9 +1,9 @@
-﻿using CatalogoProduto.Core.Context;
+﻿using CatalogoProduto.Assinc.Pagination;
+using CatalogoProduto.Assinc.Repositories.Interfaces;
+using CatalogoProduto.Core.Context;
 using CatalogoProduto.Core.Models;
-using CatalogoProduto.DTOMapster.Pagination;
-using CatalogoProduto.DTOMapster.Repositories.Interfaces;
 
-namespace CatalogoProduto.DTOMapster.Repositories
+namespace CatalogoProduto.Assinc.Repositories
 {
     public class CategoriaRepository : Repository<Categoria>, ICategoriaRepository
     {
@@ -11,21 +11,22 @@ namespace CatalogoProduto.DTOMapster.Repositories
         {
         }
 
-        public PagedList<Categoria> GetCategorias(CategoriasParameters categoriasParams)
+        public async Task<PagedList<Categoria>> GetCategorias(CategoriasParameters categoriasParams)
         {
-            var categorias = GetAll()
-                .OrderBy(p => p.CategoriaId)
+            var categorias = await GetAll();
+                
+            var categoriasOrdenadas = categorias.OrderBy(p => p.CategoriaId)
                 .AsQueryable();
             
-            var categoriasOrdenadas = PagedList<Categoria>.ToPagedList(categorias, 
+            var resultado = PagedList<Categoria>.ToPagedList(categoriasOrdenadas, 
                 categoriasParams.PageNumber, categoriasParams.PageSize);
-            return categoriasOrdenadas;
+            return resultado;
         }
 
         //Filtro Nome
-        public PagedList<Categoria> GetCategoriasFiltroNome(CategoriasFiltroNome categoriasParams)
+        public async Task<PagedList<Categoria>> GetCategoriasFiltroNome(CategoriasFiltroNome categoriasParams)
         {
-            var categorias = GetAll().AsQueryable();
+            var categorias = await GetAll();
             
             if (!string.IsNullOrEmpty(categoriasParams.Nome))
             {
@@ -33,7 +34,7 @@ namespace CatalogoProduto.DTOMapster.Repositories
             }
 
             var categoriasFiltradas = PagedList<Categoria>.ToPagedList(
-                categorias,
+                categorias.AsQueryable(),
                 categoriasParams.PageNumber,
                 categoriasParams.PageSize
             );

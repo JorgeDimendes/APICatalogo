@@ -1,4 +1,4 @@
-namespace CatalogoProduto.DTOMapster.Pagination;
+namespace CatalogoProduto.Assinc.Pagination;
 
 public abstract class QueryStringParameters
 {

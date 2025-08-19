@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using CatalogoProduto.Core.Models;
 
-namespace CatalogoProduto.DTOMapster.DTOs;
+namespace CatalogoProduto.Assinc.DTOs;
 
 public class ProdutoDto
 {
