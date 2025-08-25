@@ -3,6 +3,7 @@ using CatalogoProduto.Assinc.DTOs;
 using CatalogoProduto.Assinc.Pagination;
 using CatalogoProduto.Assinc.Repositories.Interfaces;
 using CatalogoProduto.Core.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -45,6 +46,7 @@ namespace CatalogoProduto.Assinc
         }*/
         #endregion
         
+        [Authorize]
         //Navegação avançada
         [HttpGet("pagination")]
         public async Task<ActionResult<IEnumerable<ProdutoDto>>> GetProdutosPaginacao([FromQuery] ProdutosParameters produtosParams)

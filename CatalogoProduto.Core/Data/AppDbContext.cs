@@ -1,9 +1,10 @@
 ﻿using CatalogoProduto.Core.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 //namespace APICatalogo.Context;
 namespace CatalogoProduto.Core.Context;
-public class AppDbContext: DbContext
+public class AppDbContext : IdentityDbContext
 {
     //ctor
     public AppDbContext(DbContextOptions<AppDbContext> options): base(options)
