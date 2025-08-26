@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace CatalogoProduto.Core.Migrations
+namespace CatalogoProduto.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250825053608_Initial")]
-    partial class Initial
+    [Migration("20250826034618_CriaTabelasIdentity")]
+    partial class CriaTabelasIdentity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace CatalogoProduto.Core.Migrations
+namespace CatalogoProduto.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class CriaTabelasIdentity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
